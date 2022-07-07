@@ -11,7 +11,6 @@ Objective..
 '''
 
 # imports
-from multiprocessing.sharedctypes import Value
 import time, random
 
 # welcome message
@@ -72,9 +71,8 @@ def main():
         else:
             print('**** Guess was to low! Try again\n')
             continue
-    if turns == 0:
-        print('Out of turns!')
-        restart()
+
+
     restart()
 
 
