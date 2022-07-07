@@ -55,7 +55,7 @@ def main():
     num_to_guess = random_number()
     turns = 5 # used to keep track of the users turns
     while turns > 0:
-        print(f'Attemps remaining: {turns}')
+        print(f'\nAttemps remaining: {turns}')
         num = guess()
         turns -= 1
 
@@ -66,13 +66,15 @@ def main():
             break
 
         elif num > num_to_guess:
-            print('Guess was to high! Try again\n')
+            print('**** Guess was to high! Try again\n')
             continue
 
         else:
-            print('Guess was to low! Try again\n')
+            print('**** Guess was to low! Try again\n')
             continue
-
+    if turns == 0:
+        print('Out of turns!')
+        restart()
     restart()
 
 
