@@ -26,10 +26,10 @@ def welcome():
 
 # computer generates the random number to guess
 def random_number():
-    num = random.randint(1, 3)
+    num = random.randint(1, 50)
     return num
 
-# validating users guess
+# validating users guess (i.e, input must be a letter)
 def guess():
     while True:
         try:
@@ -40,26 +40,29 @@ def guess():
             continue
 
 
+# this function will allow the game to be restarted
 def restart():
-    play_again = input('Would you like to play again? y = yes, n = no\n')
-    if play_again == 'Y':
-        main()
+    play_again = input('\nWould you like to play again? y = yes, n = no\n')
+    if play_again == 'Y' or play_again == 'y' or play_again == 'yes' or play_again == 'Yes':
+        main() # starts the game again
     else:
-        exit
+        print('Thanks for playing, have a good day!')
+        exit # exits the program is user does not want to play
 
-
-            
 
 # game play
 def main():
     num_to_guess = random_number()
-    turns = 5
+    turns = 5 # used to keep track of the users turns
     while turns > 0:
+        print(f'Attemps remaining: {turns}')
         num = guess()
         turns -= 1
 
         if num == num_to_guess:
-            print(f'You won! Number was: {num_to_guess}')
+            print('\n************************'
+            f'\nYou won! Number was: {num_to_guess}'
+            '\n************************')
             break
 
         elif num > num_to_guess:
@@ -74,6 +77,6 @@ def main():
 
 
 
-
+#welcome()
 main()
 
