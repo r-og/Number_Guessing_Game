@@ -11,6 +11,7 @@ Objective..
 '''
 
 # imports
+from multiprocessing.sharedctypes import Value
 import time, random
 
 # welcome message
@@ -25,48 +26,54 @@ def welcome():
 
 # computer generates the random number to guess
 def random_number():
-    num = random.randint(1, 50)
+    num = random.randint(1, 3)
     return num
 
-# main game
-def main():
-    num_to_guess = random_number()
-    turns = 5
+# validating users guess
+def guess():
     while True:
         try:
-            print(f'Remaining attemps: {turns}')
-            guess = int(input('Enter a number: '))
-            turns -= 1
-
+            num = int(input('Enter a number: '))
+            return num
         except ValueError:
-            print('Not a number try again\n')
+            print('Not a number, try again\n')
             continue
 
-        if guess == num_to_guess:
-            print(f'You got the number it was {num_to_guess}')
-            break
-        elif turns == 0:
-            print(f'You ran out of turns, the number was {num_to_guess}')
-            break
-        elif guess > num_to_guess:
-            print('You guess was to high!\n')
-            continue
-        else:
-            print('Guess was to low!\n')
-            continue
+
+def restart():
+    play_again = input('Would you like to play again? y = yes, n = no\n')
+    if play_again == 'Y':
+        main()
+    else:
+        exit
+
 
             
 
+# game play
+def main():
+    num_to_guess = random_number()
+    turns = 5
+    while turns > 0:
+        num = guess()
+        turns -= 1
 
-# play again?
-def game_loop():
-    main()
-    user_input = input('\nWould you like to play again?\n y = yes and n = no: ')
-    while True:
-        if user_input.capitalize == 'Y':
-            main()
-        break            
+        if num == num_to_guess:
+            print(f'You won! Number was: {num_to_guess}')
+            break
 
-game_loop()
+        elif num > num_to_guess:
+            print('Guess was to high! Try again\n')
+            continue
 
-        
+        else:
+            print('Guess was to low! Try again\n')
+            continue
+
+    restart()
+
+
+
+
+main()
+
