@@ -28,16 +28,6 @@ def random_number():
     num = random.randint(1, 50)
     return num
 
-# play again?
-def game_loop():
-    user_input = input('\nWould you like to play again?\n y = yes and n = no: ')
-    while True:
-        if user_input.capitalize == 'Y':
-            main()
-        else:
-            break
-        
-
 # main game
 def main():
     num_to_guess = random_number()
@@ -48,22 +38,35 @@ def main():
             guess = int(input('Enter a number: '))
             turns -= 1
 
-            if guess == num_to_guess:
-                print(f'You got the number it was {num_to_guess}')
-                game_loop()
-            elif turns == 0:
-                print(f'You ran out of turns, the number was {num_to_guess}')
-                game_loop()
-            elif guess > num_to_guess:
-                print('You guess was to high!\n')
-                continue
-            else:
-                print('Guess was to low!\n')
-                continue
-            
         except ValueError:
             print('Not a number try again\n')
+            continue
 
-welcome()
-main()
+        if guess == num_to_guess:
+            print(f'You got the number it was {num_to_guess}')
+            break
+        elif turns == 0:
+            print(f'You ran out of turns, the number was {num_to_guess}')
+            break
+        elif guess > num_to_guess:
+            print('You guess was to high!\n')
+            continue
+        else:
+            print('Guess was to low!\n')
+            continue
+
+            
+
+
+# play again?
+def game_loop():
+    main()
+    user_input = input('\nWould you like to play again?\n y = yes and n = no: ')
+    while True:
+        if user_input.capitalize == 'Y':
+            main()
+        break            
+
+game_loop()
+
         
